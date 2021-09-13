@@ -1,5 +1,5 @@
-import express from 'express';
+const express = require('express');
 
 const messagesRouter = express.Router();
 
-export default messagesRouter;
+module.exports = messagesRouter;

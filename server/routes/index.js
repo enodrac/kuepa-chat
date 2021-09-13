@@ -1,10 +1,10 @@
-import {Router} from 'express';
-import messagesRouter from './messages/controller/index.js';
-import usersRouter from './users/controller/index.js';
+const express = require('express');
+const messagesRouter = require('./messages/controller/index.js');
+const usersRouter = require('./users/controller/index.js');
 
-const router = Router();
+const router = express.Router();
 
 router.use('/messages', messagesRouter);
 router.use('/users', usersRouter);
 
-export default router;
+module.exports = router;

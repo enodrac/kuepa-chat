@@ -1,29 +1,39 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import http from 'http';
-import {Server as serverio} from 'socket.io';
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const http = require('http');
+const {Server} = require('socket.io');
 
-import router from './routes/index.js';
+const router = require('./routes/index.js');
 
 const app = express();
 const server = http.createServer(app);
-const io = new serverio(server);
+const io = new Server(server);
 
+app.use(
+    cors({
+        origin: '*',
+    })
+);
 app.use(express.json());
-app.use(cors());
+
+app.use('/', router);
 
 io.on('connection', (socket) => {
-    console.log('user connected');
+    console.log('+++');
+
+    socket.on('chatMessage', (message) => {
+        console.log('llego el mensaje: ', message);
+        io.emit('message', message);
+    });
+
     socket.on('disconnect', () => {
-        console.log('user disconnected');
+        console.log('---');
     });
 });
 
 const CONECTION_URL = 'mongodb+srv://enodrac:enodrac321@cluster0.w1gmk.mongodb.net/kuepaChat?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
-
-app.use('/', router);
 
 mongoose
     .connect(CONECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})

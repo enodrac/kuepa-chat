@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const messageSchema = mongoose.Schema({
     date: String,
@@ -6,6 +6,6 @@ const messageSchema = mongoose.Schema({
     content: String,
 });
 
-var messageSchema = mongoose.model('messageSchema', messageSchema);
+var messageModel = mongoose.model('messageSchema', messageSchema);
 
-export default messageSchema;
+module.exports = messageModel;

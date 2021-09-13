@@ -1,6 +1,6 @@
-import UserModel from '../../../models/user.js';
+const UserModel = require('../../../models/user.js');
 
-export async function getUser(req, res) {
+async function getUser(req, res) {
     try {
         const findUser = await UserModel.findOne({where: {user: req.body.user}});
         return res.send(findUser);
@@ -8,10 +8,10 @@ export async function getUser(req, res) {
         console.log('error getUser', error);
     }
 }
-export async function createUser(req, res) {
+async function createUser(req, res) {
     try {
         const newUser = new UserModel(req.body);
-        const findUser = await UserModel.findOne({where: {user: req.body.user}});
+        const findUser = await UserModel.findOne({user: req.body.user});
         if (findUser) return res.send(false);
         await newUser.save();
         return res.send(true);
@@ -19,3 +19,8 @@ export async function createUser(req, res) {
         console.log('error createUser', error);
     }
 }
+
+module.exports = {
+    getUser,
+    createUser,
+};
