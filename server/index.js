@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
     });
 });
 
-const CONECTION_URL = 'mongodb+srv://enodrac:enodrac321@cluster0.w1gmk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONECTION_URL = 'mongodb+srv://enodrac:enodrac321@cluster0.w1gmk.mongodb.net/kuepaChat?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
 
 app.use('/', router);

@@ -4,9 +4,10 @@ const userSchema = mongoose.Schema({
     fullName: String,
     user: String,
     password: String,
-    type: String,
+    student: Boolean,
+    admin: Boolean,
 });
 
-var userSchema = mongoose.model('userSchema', userSchema);
+var userModel = mongoose.model('userSchema', userSchema);
 
-export default userSchema;
+export default userModel;
