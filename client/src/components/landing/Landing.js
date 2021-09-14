@@ -15,6 +15,7 @@ export default function Landing() {
 
     useEffect(() => {
         if (authenticate()) history.push('/chat');
+        else sessionStorage.clear();
     }, []);
 
     function handleChange(e) {
@@ -26,7 +27,6 @@ export default function Landing() {
         getUser(user)
             .then((res) => {
                 if (res.data.user) {
-                    console.log('usuario encontrado', res.data);
                     sessionStorage.setItem('userName', res.data.user);
                     dispatch({type: 'SET_USER', payload: res.data});
                     history.push('/chat');
@@ -34,7 +34,7 @@ export default function Landing() {
                     setView({...view, error: true});
                 }
             })
-            .catch((err) => console.log('error get user', err));
+            .catch((error) => console.log('error get user', error));
     }
 
     function handleCreate(e) {
@@ -51,7 +51,7 @@ export default function Landing() {
     }
 
     return (
-        <div>
+        <div style={{backgroundColor: 'grey', height: '100vh'}}>
             {view.step ? (
                 <div>
                     <h1>Log in</h1>

@@ -21,7 +21,6 @@ app.use('/', router);
 
 io.on('connection', (socket) => {
     socket.on('chatMessage', (message) => {
-        console.log('=>', message);
         io.emit('message', message);
     });
 

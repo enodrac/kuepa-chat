@@ -5,6 +5,7 @@ import styles from './Chat.module.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {authenticate} from '../../utils';
 import {useHistory} from 'react-router-dom';
+import {saveMessage} from '../../redux/actions/index.js';
 
 let socket = io();
 
@@ -12,7 +13,7 @@ export default function Chat() {
     const history = useHistory();
     const dispatch = useDispatch();
     const userStore = useSelector((state) => state.user);
-    const [message, setMessage] = useState({user: '', content: ''});
+    const [message, setMessage] = useState({date: '', user: '', content: ''});
     const [allMessages, setAllMessages] = useState([]);
 
     socket.on('message', (message) => {
@@ -20,7 +21,7 @@ export default function Chat() {
     });
 
     useEffect(() => {
-        if (!authenticate()) history.push('/');
+        if (!authenticate(userStore)) history.push('/');
     }, []);
 
     useEffect(() => {
@@ -34,20 +35,18 @@ export default function Chat() {
     }
 
     return (
-        <div>
+        <div style={{backgroundColor: 'grey', height: '100vh'}}>
             <h1>CHAT</h1>
             <button onClick={() => logout()}>logout</button>
             <div className={styles.chat}>
                 <div className={styles.messages}>
                     {allMessages.map((msg, i) => (
-                        <p key={i}>
-                            {msg.user.fullName}: {msg.content}
-                        </p>
+                        <p key={i}>{`${msg.date.split(' ').pop()}  ${msg.user}:  ${msg.content}`}</p>
                     ))}
                 </div>
                 <input
                     onChange={(e) => {
-                        setMessage({user: userStore, content: e.target.value});
+                        setMessage({date: Date().split(' ').splice(1, 4).join(' '), user: userStore.user, content: e.target.value});
                     }}
                     type="text"
                     value={message.content}
@@ -57,6 +56,7 @@ export default function Chat() {
                     onClick={() => {
                         socket.emit('chatMessage', message);
                         setMessage({...message, content: ''});
+                        saveMessage(message);
                     }}
                 >
                     send

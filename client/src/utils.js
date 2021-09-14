@@ -1,5 +1,5 @@
-export function authenticate(history) {
+export function authenticate(userStore) {
     let user = sessionStorage.getItem('userName');
-    if (user !== null) return true;
+    if (user !== null && userStore.user) return true;
     return false;
 }
