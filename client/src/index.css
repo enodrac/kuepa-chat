@@ -3,3 +3,6 @@ body {
     padding: 0px;
     font-family: 'Glory', sans-serif;
 }
+p {
+    margin: 2px;
+}

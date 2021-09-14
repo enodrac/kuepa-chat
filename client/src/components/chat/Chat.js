@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import styles from './Chat.module.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {authenticate} from '../../utils';
+import ReactPlayer from 'react-player/youtube';
 import {useHistory} from 'react-router-dom';
 import {saveMessage, setErrorHandling, setUserListStore, setUserStore} from '../../redux/actions/index.js';
 import Record from '../record/Record';
@@ -17,9 +18,13 @@ export default function Chat() {
     const [message, setMessage] = useState({date: '', username: '', content: '', admin: false});
     const [view, setView] = useState(true);
     const [allMessages, setAllMessages] = useState([]);
+    let send = false;
 
     socket.on('message', (message) => {
-        setAllMessages([...allMessages, message]);
+        if (send) {
+            setAllMessages([message, ...allMessages]);
+            send = false;
+        }
     });
 
     socket.on('updateUserList', (usernames) => {
@@ -43,30 +48,65 @@ export default function Chat() {
 
     function sendMessage(e) {
         e.preventDefault();
-        socket.emit('chatMessage', message);
+        send = true;
         saveMessage(message);
+        socket.emit('chatMessage', message);
         setMessage({...message, content: ''});
     }
 
+    function sliceMessage(content) {
+        let splitContent = [];
+        for (let i = 0; i < 2; i++) {
+            splitContent.unshift(content.slice(0, 50));
+        }
+        return splitContent;
+    }
+
     return (
-        <div>
-            <h1>CHAT</h1>
-            <button onClick={() => logout()}>logout</button>
-            {userStore.admin ? <button onClick={() => setView(!view)}>{view ? 'history' : 'chat'}</button> : null}
+        <div className={styles.chatContainer}>
+            <div className={styles.streaming}>
+                <ReactPlayer url="https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=LofiGirl" width="100%" height="100%" muted playing />
+            </div>
+
             {view ? (
                 <div className={styles.chat}>
-                    <div className={styles.messages}>
+                    <div className={styles.infoContainer}>
+                        <h2>CHAT</h2>
+                        {userStore.admin ? (
+                            <button className={styles.chatIndicatorBtn} onClick={() => setView(!view)}>
+                                {view ? 'history' : 'chat'}
+                            </button>
+                        ) : null}
+                        <button onClick={() => logout()}>logout</button>
+                    </div>
+                    <div className={styles.chatMessages}>
                         {allMessages.map((msg, i) => (
-                            <div key={i}>
-                                <label>
-                                    {msg.date.split(' ').pop()} {msg.username === userStore.username ? 'you' : msg.username}{' '}
-                                    {msg.admin ? 'admin' : null}: {msg.content}
-                                </label>
+                            <div className={msg.username === userStore.username ? styles.chatYourMsg : styles.chatMsg} key={i}>
+                                {msg.content.length > 50 ? (
+                                    <div>
+                                        <label>
+                                            {msg.date.split(' ').pop().slice(0, 5)} {msg.username === userStore.username ? 'you' : msg.username}{' '}
+                                            {msg.admin ? 'admin' : null}:
+                                        </label>
+                                        {sliceMessage(msg.content).map((content) => (
+                                            <p>{content}</p>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <label>
+                                            {msg.date.split(' ').pop().slice(0, 5)} {msg.username === userStore.username ? 'you' : msg.username}{' '}
+                                            {msg.admin ? 'admin' : null}:{' '}
+                                        </label>
+                                        <p>{msg.content}</p>
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
                     <form onSubmit={sendMessage}>
                         <input
+                            className={styles.chatInput}
                             onChange={(e) =>
                                 setMessage({
                                     ...message,
@@ -79,7 +119,7 @@ export default function Chat() {
                             value={message.content}
                             name="name"
                         />
-                        <input type="submit" value="send" />
+                        <input className={styles.sendButton} type="submit" value="SEND" />
                     </form>
                 </div>
             ) : (
