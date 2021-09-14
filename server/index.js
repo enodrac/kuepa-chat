@@ -20,16 +20,12 @@ app.use(express.json());
 app.use('/', router);
 
 io.on('connection', (socket) => {
-    console.log('+++');
-
     socket.on('chatMessage', (message) => {
-        console.log('llego el mensaje: ', message);
+        console.log('=>', message);
         io.emit('message', message);
     });
 
-    socket.on('disconnect', () => {
-        console.log('---');
-    });
+    socket.on('disconnect', () => {});
 });
 
 const CONECTION_URL = 'mongodb+srv://enodrac:enodrac321@cluster0.w1gmk.mongodb.net/kuepaChat?retryWrites=true&w=majority';

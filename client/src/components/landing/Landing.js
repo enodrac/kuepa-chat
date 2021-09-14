@@ -4,15 +4,17 @@ import styles from './Landing.module.css';
 import {useHistory} from 'react-router-dom';
 import {createUser, getUser} from '../../redux/actions/index';
 import {authenticate} from '../../utils';
+import {useDispatch} from 'react-redux';
 
 export default function Landing() {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [user, setUser] = useState({fullName: '', user: '', password: '', student: true, admin: false});
     const [view, setView] = useState({error: false, step: true, found: false});
 
     useEffect(() => {
-        if (authenticate()) history.goBack();
+        if (authenticate()) history.push('/chat');
     }, []);
 
     function handleChange(e) {
@@ -24,7 +26,9 @@ export default function Landing() {
         getUser(user)
             .then((res) => {
                 if (res.data.user) {
+                    console.log('usuario encontrado', res.data);
                     sessionStorage.setItem('userName', res.data.user);
+                    dispatch({type: 'SET_USER', payload: res.data});
                     history.push('/chat');
                 } else {
                     setView({...view, error: true});

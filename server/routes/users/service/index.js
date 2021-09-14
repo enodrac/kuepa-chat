@@ -2,7 +2,7 @@ const UserModel = require('../../../models/user.js');
 
 async function getUser(req, res) {
     try {
-        const findUser = await UserModel.findOne({where: {user: req.body.user}});
+        const findUser = await UserModel.findOne({user: req.query.user});
         return res.send(findUser);
     } catch (error) {
         console.log('error getUser', error);
