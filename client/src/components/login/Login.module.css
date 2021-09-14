@@ -2,16 +2,34 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 40%;
-    background-color: blue;
+    align-items: center;
+    height: 80%;
 }
 .loginForm {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 20%;
-    background-color: red;
+    height: 50%;
+    width: 50%;
 }
 .loginTitle {
-    align-self: center;
+    font-size: 80px;
+}
+.inputForm {
+    border-radius: 5px;
+    border: #0266d6 solid 2px;
+    outline: none;
+    height: 10%;
+    font-size: 18px;
+    padding: 5px;
+}
+.signInButton {
+    border-radius: 5px;
+    border: none;
+    background-color: #0eaf52;
+    color: white;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 25px;
+    margin-bottom: -15%;
 }

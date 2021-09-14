@@ -27,13 +27,41 @@ export default function Register() {
             .catch((error) => dispatch(setErrorHandling({...errorHandling, loading: false, existing: true})));
     }
     return (
-        <div>
+        <div className={styles.registerContainer}>
             <h1>Register Account</h1>
-            <form onSubmit={handleCreate}>
-                <input onChange={handleChange} type="text" name="fullname" placeholder="Full name" value={newUser.fullname} required />
-                <input onChange={handleChange} type="text" name="username" placeholder="User" value={newUser.username} required />
-                <input onChange={handleChange} type="password" name="password" placeholder="Password" value={newUser.password} required />
+            <form className={styles.registerForm} onSubmit={handleCreate}>
+                <label>Fullname</label>
+                <input
+                    className={styles.inputForm}
+                    onChange={handleChange}
+                    type="text"
+                    name="fullname"
+                    placeholder="Full name"
+                    value={newUser.fullname}
+                    required
+                />
+                <label>Username</label>
+                <input
+                    className={styles.inputForm}
+                    onChange={handleChange}
+                    type="text"
+                    name="username"
+                    placeholder="User"
+                    value={newUser.username}
+                    required
+                />
+                <label>Password</label>
+                <input
+                    className={styles.inputForm}
+                    onChange={handleChange}
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={newUser.password}
+                    required
+                />
                 <select
+                    className={styles.inputForm}
                     onChange={(e) =>
                         e.target.value ? setNewUser({...newUser, student: false, admin: true}) : setNewUser({...newUser, student: true, admin: false})
                     }
@@ -41,7 +69,7 @@ export default function Register() {
                     <option value={false}>Student</option>
                     <option value={true}>Administrator</option>
                 </select>
-                <input className={styles.nav_button} type="submit" value="Register" />
+                <input className={styles.registerButton} type="submit" value="Register" />
             </form>
             {errorHandling.existing ? (
                 <div>

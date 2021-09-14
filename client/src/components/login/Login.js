@@ -31,9 +31,27 @@ export default function Login() {
         <div className={styles.loginContainer}>
             <h1 className={styles.loginTitle}>Log in</h1>
             <form className={styles.loginForm} onSubmit={handleLogin}>
-                <input onChange={handleChange} type="text" name="username" placeholder="User" value={loginUser.username} required />
-                <input onChange={handleChange} type="password" name="password" placeholder="Password" value={loginUser.password} required />
-                <input className={styles.nav_button} type="submit" value="Login" />
+                <label>Username</label>
+                <input
+                    className={styles.inputForm}
+                    onChange={handleChange}
+                    type="text"
+                    name="username"
+                    placeholder="Enter your username..."
+                    value={loginUser.username}
+                    required
+                />
+                <label>Password</label>
+                <input
+                    className={styles.inputForm}
+                    onChange={handleChange}
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password..."
+                    value={loginUser.password}
+                    required
+                />
+                <input className={styles.signInButton} type="submit" value="Sign in" />
             </form>
             {errorHandling.notFound ? (
                 <div>

@@ -24,16 +24,16 @@ export default function Landing() {
         <div className={styles.container}>
             {!loading ? (
                 <div className={styles.inputContainer}>
-                    {view ? <Login /> : <Register />}
                     <button
-                        className={styles.nav_button}
+                        className={styles.swapButton}
                         onClick={() => {
                             setView(!view);
                             dispatch(setErrorHandling({loading: false, notFound: false, existing: false}));
                         }}
                     >
-                        {view ? 'register' : 'login'}
+                        {view ? 'Register' : 'Sign in'}
                     </button>
+                    {view ? <Login /> : <Register />}
                 </div>
             ) : (
                 <div>
