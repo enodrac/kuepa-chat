@@ -10,8 +10,8 @@ export default function Landing() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const [user, setUser] = useState({fullName: '', user: '', password: '', student: true, admin: false});
-    const [view, setView] = useState({error: false, step: true, found: false});
+    const [user, setUser] = useState({fullname: '', user: '', password: '', student: true, admin: false});
+    const [view, setView] = useState({error: false, step: 'login', found: false});
 
     useEffect(() => {
         if (authenticate()) history.push('/chat');
@@ -23,6 +23,7 @@ export default function Landing() {
     }
 
     function handleLogin(e) {
+        setView('loading');
         e.preventDefault();
         getUser(user)
             .then((res) => {
@@ -31,7 +32,7 @@ export default function Landing() {
                     dispatch({type: 'SET_USER', payload: res.data});
                     history.push('/chat');
                 } else {
-                    setView({...view, error: true});
+                    setView({...view, step: 'login', error: true});
                 }
             })
             .catch((error) => console.log('error get user', error));
@@ -44,7 +45,7 @@ export default function Landing() {
                 if (res.data) {
                     handleLogin(e);
                 } else {
-                    setView({...view, found: true});
+                    setView({...view, step: 'register', found: true});
                 }
             })
             .catch((err) => console.log('error create user', err));
@@ -52,7 +53,7 @@ export default function Landing() {
 
     return (
         <div style={{backgroundColor: 'grey', height: '100vh'}}>
-            {view.step ? (
+            {view.step === 'login' ? (
                 <div>
                     <h1>Log in</h1>
                     <form onSubmit={handleLogin}>
@@ -69,18 +70,20 @@ export default function Landing() {
                     <button
                         className={styles.nav_button}
                         onClick={() => {
-                            setView({...view, error: false, step: false});
-                            setUser({fullName: '', user: '', password: '', student: true, admin: false});
+                            setView({...view, error: false, step: 'register'});
+                            setUser({fullname: '', user: '', password: '', student: true, admin: false});
                         }}
                     >
                         Register
                     </button>
                 </div>
-            ) : (
+            ) : null}
+
+            {view.step === 'register' ? (
                 <div>
                     <h1>Register Account</h1>
                     <form onSubmit={handleCreate}>
-                        <input onChange={handleChange} type="text" name="fullName" placeholder="Full name" value={user.fullName} required />
+                        <input onChange={handleChange} type="text" name="fullname" placeholder="Full name" value={user.fullname} required />
                         <input onChange={handleChange} type="text" name="user" placeholder="User" value={user.user} required />
                         <input onChange={handleChange} type="password" name="password" placeholder="Password" value={user.password} required />
                         <select
@@ -101,14 +104,19 @@ export default function Landing() {
                     <button
                         className={styles.nav_button}
                         onClick={() => {
-                            setView({...view, found: false, step: true});
-                            setUser({fullName: '', user: '', password: '', student: true, admin: false});
+                            setView({...view, found: false, step: 'login'});
+                            setUser({fullname: '', user: '', password: '', student: true, admin: false});
                         }}
                     >
                         Login
                     </button>
                 </div>
-            )}
+            ) : null}
+            {view.step === 'loading' ? (
+                <div>
+                    <h1>cargando...</h1>
+                </div>
+            ) : null}
         </div>
     );
 }

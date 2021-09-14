@@ -11,3 +11,7 @@ export function createUser(user) {
 export function saveMessage(message) {
     axios.post('/messages', message);
 }
+
+export function getMessagesByUser(user) {
+    return axios.get(`/messages?user=${user}`);
+}
