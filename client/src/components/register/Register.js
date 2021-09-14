@@ -6,16 +6,16 @@ import {setLoadingStore} from '../../redux/actions';
 
 export default function Register() {
     const dispatch = useDispatch();
-    const [user, setUser] = useState({fullname: '', user: '', password: '', student: true, admin: false});
+    const [username, setUser] = useState({fullname: '', username: '', password: '', student: true, admin: false});
     const [error, setError] = useState(false);
 
     function handleChange(e) {
-        setUser({...user, [e.target.name]: e.target.value});
+        setUser({...username, [e.target.name]: e.target.value});
     }
     function handleCreate(e) {
         e.preventDefault();
         dispatch(setLoadingStore(true));
-        register(user)
+        register(username)
             .then((res) => {
                 if (!res.data) throw new Error();
             })
@@ -25,12 +25,12 @@ export default function Register() {
         <div>
             <h1>Register Account</h1>
             <form onSubmit={handleCreate}>
-                <input onChange={handleChange} type="text" name="fullname" placeholder="Full name" value={user.fullname} required />
-                <input onChange={handleChange} type="text" name="user" placeholder="User" value={user.user} required />
-                <input onChange={handleChange} type="password" name="password" placeholder="Password" value={user.password} required />
+                <input onChange={handleChange} type="text" name="fullname" placeholder="Full name" value={username.fullname} required />
+                <input onChange={handleChange} type="text" name="username" placeholder="User" value={username.username} required />
+                <input onChange={handleChange} type="password" name="password" placeholder="Password" value={username.password} required />
                 <select
                     onChange={(e) =>
-                        e.target.value ? setUser({...user, student: false, admin: true}) : setUser({...user, student: true, admin: false})
+                        e.target.value ? setUser({...username, student: false, admin: true}) : setUser({...username, student: true, admin: false})
                     }
                 >
                     <option value={false}>Student</option>
@@ -40,7 +40,7 @@ export default function Register() {
             </form>
             {error ? (
                 <div>
-                    <label className={styles.error}>This user {user.user} already exist</label>
+                    <label className={styles.error}>This username {username.username} already exist</label>
                 </div>
             ) : null}
         </div>

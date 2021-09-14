@@ -1,19 +1,19 @@
-import {SET_USER, SET_LOADING, SET_USER_LIST} from '../actions/index.js';
+import {SET_USERNAME, SET_LOADING, SET_USERNAME_LIST} from '../actions/index.js';
 
 const initialState = {
-    user: {},
+    username: {},
     loading: false,
-    userList: [],
+    usernameList: [],
 };
 
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
-        case SET_USER:
-            return {...state, user: action.payload};
+        case SET_USERNAME:
+            return {...state, username: action.payload};
         case SET_LOADING:
             return {...state, loading: action.payload};
-        case SET_USER_LIST:
-            return {...state, userList: action.payload};
+        case SET_USERNAME_LIST:
+            return {...state, usernameList: action.payload};
         default:
             return {...state};
     }

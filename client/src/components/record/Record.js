@@ -5,8 +5,8 @@ import {useSelector} from 'react-redux';
 import {getMessagesByUser} from '../../redux/actions/index.js';
 
 export default function Record() {
-    const userStore = useSelector((state) => state.user);
-    const userListStore = useSelector((state) => state.userList);
+    const userStore = useSelector((state) => state.username);
+    const usernameListStore = useSelector((state) => state.usernameList);
     const [allMsgByUser, setAllMsgByUser] = useState([]);
     const [search, setSearch] = useState('');
 
@@ -24,24 +24,24 @@ export default function Record() {
             <p>historial</p>
             <form onSubmit={handleSearch}>
                 <select onChange={(e) => setSearch(e.target.value)}>
-                    <option value="">online users...</option>
-                    {userListStore.map((user, i) =>
-                        user.user ? (
-                            <option key={i} value={user.user}>
-                                {user.user}
+                    <option value="">online usernames...</option>
+                    {usernameListStore.map((username, i) =>
+                        username.data.username ? (
+                            <option key={i} value={username.data.username}>
+                                {username.data.username}
                             </option>
                         ) : null
                     )}
                 </select>
-                <label>all users: </label>
-                <input onChange={(e) => setSearch(e.target.value)} type="text" value={search} placeholder="user..." />
+                <label>all usernames: </label>
+                <input onChange={(e) => setSearch(e.target.value)} type="text" value={search} placeholder="username..." />
                 <input type="submit" value="search" />
             </form>
             <div>
                 {allMsgByUser.map((msg, i) => (
                     <div key={i}>
                         <label>
-                            {msg.date} {msg.user === userStore.user ? 'you' : msg.user} {msg.admin ? 'admin' : null}: {msg.content}
+                            {msg.date} {msg.username === userStore.username ? 'you' : msg.username} {msg.admin ? 'admin' : null}: {msg.content}
                         </label>
                     </div>
                 ))}

@@ -25,16 +25,15 @@ io.on('connection', (socket) => {
     socket.on('chatMessage', (message) => {
         io.emit('message', message);
     });
-    socket.on('addUserToList', (userStore) => {
-        const aux = users.filter((user) => user.user === userStore.user);
+    socket.on('addUserToList', (newUser) => {
+        const aux = users.filter((user) => user.data.user === newUser.user);
         if (!aux.length) {
-            users.push(userStore);
+            users.push({id: socket.id, data: newUser});
         }
         io.emit('updateUserList', users);
     });
-
-    socket.on('disconnect', () => {
-        // io.emit('updateUserList', users);
+    socket.on('removeUserFromList', (disconnectedUser) => {
+        const aux = users.filter((user) => user.data.user === newUser.user);
     });
 });
 

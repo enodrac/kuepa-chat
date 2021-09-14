@@ -13,8 +13,8 @@ let socket = io();
 export default function Chat() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const userStore = useSelector((state) => state.user);
-    const [message, setMessage] = useState({date: '', user: '', content: '', admin: false});
+    const userStore = useSelector((state) => state.username);
+    const [message, setMessage] = useState({date: '', username: '', content: '', admin: false});
     const [view, setView] = useState(true);
     const [allMessages, setAllMessages] = useState([]);
 
@@ -22,19 +22,20 @@ export default function Chat() {
         setAllMessages([...allMessages, message]);
     });
 
-    socket.on('updateUserList', (users) => {
-        dispatch(setUserListStore(users));
+    socket.on('updateUserList', (usernames) => {
+        dispatch(setUserListStore(usernames));
     });
 
     useEffect(() => {
         socket.emit('addUserToList', userStore);
-        if (!authenticate(userStore.user)) history.push('/');
+        if (!authenticate(userStore.username)) history.push('/');
         if (userStore.admin) setMessage({...message, admin: true});
         return () => logout();
     }, []);
 
     function logout() {
         sessionStorage.clear();
+        socket.emit('removeUserFromList', userStore);
         dispatch(setUserStore({}));
         dispatch(setLoadingStore(false));
         history.push('/');
@@ -58,8 +59,8 @@ export default function Chat() {
                         {allMessages.map((msg, i) => (
                             <div key={i}>
                                 <label>
-                                    {msg.date.split(' ').pop()} {msg.user === userStore.user ? 'you' : msg.user} {msg.admin ? 'admin' : null}:{' '}
-                                    {msg.content}
+                                    {msg.date.split(' ').pop()} {msg.username === userStore.username ? 'you' : msg.username}{' '}
+                                    {msg.admin ? 'admin' : null}: {msg.content}
                                 </label>
                             </div>
                         ))}
@@ -70,7 +71,7 @@ export default function Chat() {
                                 setMessage({
                                     ...message,
                                     date: Date().split(' ').splice(1, 4).join(' '),
-                                    user: userStore.user,
+                                    username: userStore.username,
                                     content: e.target.value,
                                 })
                             }

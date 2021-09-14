@@ -9,16 +9,16 @@ export default function Login() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [user, setUser] = useState({user: '', password: ''});
+    const [username, setUser] = useState({username: '', password: ''});
     const [error, setError] = useState(false);
 
     function handleChange(e) {
-        setUser({...user, [e.target.name]: e.target.value});
+        setUser({...username, [e.target.name]: e.target.value});
     }
     function handleLogin(e) {
         e.preventDefault();
         dispatch(setLoadingStore(true));
-        login(user)
+        login(username)
             .then((res) => {
                 if (res) {
                     dispatch(setUserStore(res));
@@ -31,8 +31,8 @@ export default function Login() {
         <div>
             <h1>Log in</h1>
             <form onSubmit={handleLogin}>
-                <input onChange={handleChange} type="text" name="user" placeholder="User" value={user.user} required />
-                <input onChange={handleChange} type="password" name="password" placeholder="Password" value={user.password} required />
+                <input onChange={handleChange} type="text" name="username" placeholder="User" value={username.username} required />
+                <input onChange={handleChange} type="password" name="password" placeholder="Password" value={username.password} required />
                 <input className={styles.nav_button} type="submit" value="Login" />
             </form>
             {error ? (
