@@ -32,6 +32,13 @@ export default function Chat() {
         history.push('/');
     }
 
+    function sendMessage(e) {
+        e.preventDefault();
+        socket.emit('chatMessage', message);
+        saveMessage(message);
+        setMessage({...message, content: ''});
+    }
+
     return (
         <div style={{backgroundColor: 'grey', height: '100vh'}}>
             <h1>CHAT</h1>
@@ -47,23 +54,17 @@ export default function Chat() {
                         </div>
                     ))}
                 </div>
-                <input
-                    onChange={(e) =>
-                        setMessage({...message, date: Date().split(' ').splice(1, 4).join(' '), user: userStore.user, content: e.target.value})
-                    }
-                    type="text"
-                    value={message.content}
-                    name="name"
-                />
-                <button
-                    onClick={() => {
-                        socket.emit('chatMessage', message);
-                        saveMessage(message);
-                        setMessage({...message, content: ''});
-                    }}
-                >
-                    send
-                </button>
+                <form action={(e) => sendMessage(e)}>
+                    <input
+                        onChange={(e) =>
+                            setMessage({...message, date: Date().split(' ').splice(1, 4).join(' '), user: userStore.user, content: e.target.value})
+                        }
+                        type="text"
+                        value={message.content}
+                        name="name"
+                    />
+                    <button onClick={(e) => sendMessage(e)}>send</button>
+                </form>
             </div>
         </div>
     );
