@@ -113,8 +113,7 @@ export default function Chat() {
                         {allMsgByUser.map((msg, i) => (
                             <div key={i}>
                                 <label>
-                                    {msg.date.split(' ').pop()} {msg.user === userStore.user ? 'you' : msg.user} {msg.admin ? 'admin' : null}:{' '}
-                                    {msg.content}
+                                    {msg.date} {msg.user === userStore.user ? 'you' : msg.user} {msg.admin ? 'admin' : null}: {msg.content}
                                 </label>
                             </div>
                         ))}
