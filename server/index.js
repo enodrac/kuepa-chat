@@ -24,12 +24,16 @@ const users = [];
 io.on('connection', (socket) => {
     socket.on('chatMessage', (message) => {
         io.emit('message', message);
-        io.emit('userList', users);
     });
-    socket.on('userList', (userStore) => {
+    socket.on('addUserToList', (userStore) => {
+        console.log('new user');
         const aux = users.filter((user) => user.user === userStore.user);
-        if (!aux.length) users.push(userStore);
-        io.emit('userList', users);
+        console.log('aux', aux);
+        if (!aux.length) {
+            console.log('added', userStore.user);
+            users.push(userStore);
+        }
+        io.emit('updateUserList', users);
     });
 
     socket.on('disconnect', () => {});

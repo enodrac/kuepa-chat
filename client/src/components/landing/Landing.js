@@ -3,9 +3,9 @@ import React, {useEffect, useState} from 'react';
 import styles from './Landing.module.css';
 import {useHistory} from 'react-router-dom';
 import {authenticate} from '../../utils';
+import {useSelector} from 'react-redux';
 import Login from '../login/Login';
 import Register from '../register/Register';
-import {useSelector} from 'react-redux';
 
 export default function Landing() {
     const history = useHistory();

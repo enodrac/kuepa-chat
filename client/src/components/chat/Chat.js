@@ -5,7 +5,8 @@ import styles from './Chat.module.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {authenticate} from '../../utils';
 import {useHistory} from 'react-router-dom';
-import {getMessagesByUser, saveMessage} from '../../redux/actions/index.js';
+import {saveMessage, setLoadingStore, setUserListStore, setUserStore} from '../../redux/actions/index.js';
+import Record from '../record/Record';
 
 let socket = io();
 
@@ -16,28 +17,26 @@ export default function Chat() {
     const [message, setMessage] = useState({date: '', user: '', content: '', admin: false});
     const [view, setView] = useState(true);
     const [allMessages, setAllMessages] = useState([]);
-    const [allMsgByUser, setAllMsgByUser] = useState([]);
-    const [search, setSearch] = useState('');
-    const [userList, setUserList] = useState([]);
 
     socket.on('message', (message) => {
         setAllMessages([...allMessages, message]);
     });
 
-    socket.on('userList', (users) => {
-        setUserList(users);
+    socket.on('updateUserList', (users) => {
+        dispatch(setUserListStore(users));
     });
 
     useEffect(() => {
-        socket.emit('userList', userStore);
-        if (!authenticate(userStore)) history.push('/');
+        socket.emit('addUserToList', userStore);
+        if (!authenticate(userStore.user)) history.push('/');
         if (userStore.admin) setMessage({...message, admin: true});
         return () => logout();
     }, []);
 
     function logout() {
         sessionStorage.clear();
-        dispatch({type: 'SET_USER', payload: {}});
+        dispatch(setUserStore({}));
+        dispatch(setLoadingStore(false));
         history.push('/');
     }
 
@@ -48,17 +47,8 @@ export default function Chat() {
         setMessage({...message, content: ''});
     }
 
-    function handleSearch(e) {
-        e.preventDefault();
-        if (search.length) {
-            getMessagesByUser(search).then((res) => {
-                setAllMsgByUser(res.data);
-            });
-        }
-    }
-
     return (
-        <div style={{backgroundColor: 'grey', height: '100vh'}}>
+        <div>
             <h1>CHAT</h1>
             <button onClick={() => logout()}>logout</button>
             {userStore.admin ? <button onClick={() => setView(!view)}>{view ? 'history' : 'chat'}</button> : null}
@@ -92,33 +82,7 @@ export default function Chat() {
                     </form>
                 </div>
             ) : (
-                <div>
-                    <p>historial</p>
-                    <form onSubmit={handleSearch}>
-                        <select onChange={(e) => setSearch(e.target.value)}>
-                            <option value="">online users...</option>
-                            {userList.map((user, i) =>
-                                user.user ? (
-                                    <option key={i} value={user.user}>
-                                        {user.user}
-                                    </option>
-                                ) : null
-                            )}
-                        </select>
-                        <label>all users: </label>
-                        <input onChange={(e) => setSearch(e.target.value)} type="text" value={search} placeholder="user..." />
-                        <input type="submit" value="search" />
-                    </form>
-                    <div>
-                        {allMsgByUser.map((msg, i) => (
-                            <div key={i}>
-                                <label>
-                                    {msg.date} {msg.user === userStore.user ? 'you' : msg.user} {msg.admin ? 'admin' : null}: {msg.content}
-                                </label>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <Record />
             )}
         </div>
     );
