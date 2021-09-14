@@ -24,16 +24,16 @@ export default function Record() {
             <p>historial</p>
             <form onSubmit={handleSearch}>
                 <select onChange={(e) => setSearch(e.target.value)}>
-                    <option value="">online usernames...</option>
-                    {usernameListStore.map((username, i) =>
-                        username.data.username ? (
-                            <option key={i} value={username.data.username}>
-                                {username.data.username}
+                    <option value="">online users...</option>
+                    {usernameListStore.map((onlineUser, i) =>
+                        onlineUser.username ? (
+                            <option key={i} value={onlineUser.username}>
+                                {onlineUser.username}
                             </option>
                         ) : null
                     )}
                 </select>
-                <label>all usernames: </label>
+                <label>all users: </label>
                 <input onChange={(e) => setSearch(e.target.value)} type="text" value={search} placeholder="username..." />
                 <input type="submit" value="search" />
             </form>

@@ -1,0 +1,17 @@
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 40%;
+    background-color: blue;
+}
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 20%;
+    background-color: red;
+}
+.loginTitle {
+    align-self: center;
+}

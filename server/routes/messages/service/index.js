@@ -3,7 +3,7 @@ const UserModel = require('../../../models/user.js');
 
 async function getMessagesByUser(req, res) {
     try {
-        const allMessages = await MessageModel.find({user: req.query.user});
+        const allMessages = await MessageModel.find({username: req.query.username});
         return res.send(allMessages);
     } catch (error) {
         console.log('error getMessagesByUser', error);

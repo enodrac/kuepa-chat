@@ -1,29 +1,28 @@
 import {getUser, createUser} from './redux/actions';
 
 export function authenticate(userStore) {
-    let username = sessionStorage.getItem('usernameName');
+    let username = sessionStorage.getItem('username');
     if (username !== null && userStore) return true;
     return false;
 }
 
-export async function login(username) {
+export async function login(loginUser) {
     try {
-        const res = await getUser(username);
+        const res = await getUser(loginUser);
         if (res.data) {
-            sessionStorage.setItem('usernameName', res.data.username);
-            return res.data;
+            sessionStorage.setItem('username', res.data.username);
+            return res;
         } else throw new Error();
     } catch (error) {
         return false;
     }
 }
 
-export async function register(username) {
+export async function register(newUser) {
     try {
-        const res = await createUser(username);
+        const res = await createUser(newUser);
         if (res.data) {
-            login(res.data.username);
-            return true;
+            return login(res.data);
         } else throw new Error();
     } catch (error) {
         return false;

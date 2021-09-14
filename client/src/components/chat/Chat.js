@@ -5,7 +5,7 @@ import styles from './Chat.module.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {authenticate} from '../../utils';
 import {useHistory} from 'react-router-dom';
-import {saveMessage, setLoadingStore, setUserListStore, setUserStore} from '../../redux/actions/index.js';
+import {saveMessage, setErrorHandling, setUserListStore, setUserStore} from '../../redux/actions/index.js';
 import Record from '../record/Record';
 
 let socket = io();
@@ -37,7 +37,7 @@ export default function Chat() {
         sessionStorage.clear();
         socket.emit('removeUserFromList', userStore);
         dispatch(setUserStore({}));
-        dispatch(setLoadingStore(false));
+        dispatch(setErrorHandling({loading: false, notFound: false, existing: false}));
         history.push('/');
     }
 

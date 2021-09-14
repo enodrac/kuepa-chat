@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    position: relative;
+    width: 100vh;
+    height: 95vh;
+    overflow: hidden;
+    background-color: coral;
+    justify-content: center;
+    align-items: center;
+}
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    background-color: green;
+    height: 80%;
+    width: 80%;
+}

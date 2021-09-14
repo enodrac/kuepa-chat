@@ -1,41 +1,41 @@
 import React, {useState} from 'react';
 import styles from './Login.module.css';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {login} from '../../utils';
-import {setLoadingStore, setUserStore} from '../../redux/actions';
+import {setErrorHandling, setUserStore} from '../../redux/actions';
 
 export default function Login() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const errorHandling = useSelector((state) => state.errorHandling);
 
-    const [username, setUser] = useState({username: '', password: ''});
-    const [error, setError] = useState(false);
+    const [loginUser, setLoginUser] = useState({username: '', password: ''});
 
     function handleChange(e) {
-        setUser({...username, [e.target.name]: e.target.value});
+        setLoginUser({...loginUser, [e.target.name]: e.target.value});
     }
     function handleLogin(e) {
         e.preventDefault();
-        dispatch(setLoadingStore(true));
-        login(username)
+        dispatch(setErrorHandling({...errorHandling, loading: true}));
+        login(loginUser)
             .then((res) => {
-                if (res) {
-                    dispatch(setUserStore(res));
+                if (res.data) {
+                    dispatch(setUserStore(res.data));
                     history.push('/chat');
                 } else throw new Error();
             })
-            .catch((error) => setError(true));
+            .catch((error) => dispatch(setErrorHandling({...errorHandling, loading: false, notFound: true})));
     }
     return (
-        <div>
-            <h1>Log in</h1>
-            <form onSubmit={handleLogin}>
-                <input onChange={handleChange} type="text" name="username" placeholder="User" value={username.username} required />
-                <input onChange={handleChange} type="password" name="password" placeholder="Password" value={username.password} required />
+        <div className={styles.loginContainer}>
+            <h1 className={styles.loginTitle}>Log in</h1>
+            <form className={styles.loginForm} onSubmit={handleLogin}>
+                <input onChange={handleChange} type="text" name="username" placeholder="User" value={loginUser.username} required />
+                <input onChange={handleChange} type="password" name="password" placeholder="Password" value={loginUser.password} required />
                 <input className={styles.nav_button} type="submit" value="Login" />
             </form>
-            {error ? (
+            {errorHandling.notFound ? (
                 <div>
                     <label className={styles.error}>User not found</label>
                 </div>

@@ -19,21 +19,22 @@ app.use(express.json());
 
 app.use('/', router);
 
-const users = [];
+let onlineUserList = [];
 
 io.on('connection', (socket) => {
     socket.on('chatMessage', (message) => {
         io.emit('message', message);
     });
     socket.on('addUserToList', (newUser) => {
-        const aux = users.filter((user) => user.data.user === newUser.user);
-        if (!aux.length) {
-            users.push({id: socket.id, data: newUser});
+        const allredyOn = onlineUserList.filter((onlineUser) => onlineUser.username === newUser.username);
+        if (!allredyOn.length) {
+            onlineUserList.push(newUser);
         }
-        io.emit('updateUserList', users);
+        io.emit('updateUserList', onlineUserList);
     });
     socket.on('removeUserFromList', (disconnectedUser) => {
-        const aux = users.filter((user) => user.data.user === newUser.user);
+        onlineUserList = onlineUserList.filter((onlineUser) => onlineUser.username !== disconnectedUser.username);
+        io.emit('updateUserList', onlineUserList);
     });
 });
 
