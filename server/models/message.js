@@ -4,8 +4,7 @@ const messageSchema = mongoose.Schema({
     date: String,
     user: String,
     content: String,
+    admin: Boolean,
 });
 
-var messageModel = mongoose.model('messageSchema', messageSchema);
-
-module.exports = messageModel;
+module.exports = mongoose.model('messageSchema', messageSchema);
