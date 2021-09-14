@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import styles from './Register.module.css';
 import {register} from '../../utils';
+import {useDispatch} from 'react-redux';
+import {setLoadingStore} from '../../redux/actions';
 
 export default function Register() {
+    const dispatch = useDispatch();
     const [user, setUser] = useState({fullname: '', user: '', password: '', student: true, admin: false});
     const [error, setError] = useState(false);
 
@@ -11,6 +14,7 @@ export default function Register() {
     }
     function handleCreate(e) {
         e.preventDefault();
+        dispatch(setLoadingStore(true));
         register(user)
             .then((res) => {
                 if (!res.data) throw new Error();

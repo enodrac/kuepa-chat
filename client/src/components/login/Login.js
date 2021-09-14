@@ -3,6 +3,7 @@ import styles from './Login.module.css';
 import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {login} from '../../utils';
+import {setLoadingStore, setUserStore} from '../../redux/actions';
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -16,10 +17,11 @@ export default function Login() {
     }
     function handleLogin(e) {
         e.preventDefault();
+        dispatch(setLoadingStore(true));
         login(user)
             .then((res) => {
                 if (res) {
-                    dispatch({type: 'SET_USER', payload: res});
+                    dispatch(setUserStore(res));
                     history.push('/chat');
                 } else throw new Error();
             })
