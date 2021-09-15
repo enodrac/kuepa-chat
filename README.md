@@ -40,7 +40,7 @@ correr la app. Si se utiliza mongoDb de forma local de debe tener abierto powers
     para instancia local 
     -CONECTION_URL = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
     
-    -O-
+    *solo se tiene que poner una variable dependiendo si es local o atlas
     
     para atlas usuario gratis(cluster0)
     -CONECTION_URL = "mongodb+srv://user:password@cluster0.w1gmk.mongodb.net/NAME?retryWrites=true&w=majority"
