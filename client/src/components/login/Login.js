@@ -41,6 +41,11 @@ export default function Login() {
                 .catch((error) => dispatch(setErrorHandling({...errorHandling, loading: false, notFound: true, connected: false})));
         }
     }
+    function timeOut() {
+        setTimeout(() => {
+            dispatch(setErrorHandling({...errorHandling, notFound: false, connected: false}));
+        }, 3000);
+    }
     return (
         <div className={styles.loginContainer}>
             <h1 className={styles.loginTitle}>Log in</h1>
@@ -68,13 +73,15 @@ export default function Login() {
                 <input className={styles.signInButton} type="submit" value="Sign in" />
             </form>
             {errorHandling.notFound ? (
-                <div>
-                    <label className={styles.error}>User not found</label>
+                <div className={styles.error}>
+                    {timeOut()}
+                    <label>User not found</label>
                 </div>
             ) : null}
             {errorHandling.connected ? (
-                <div>
-                    <label className={styles.error}>User is connected</label>
+                <div className={styles.error}>
+                    {timeOut()}
+                    <label>User is connected</label>
                 </div>
             ) : null}
         </div>

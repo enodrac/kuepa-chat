@@ -26,6 +26,11 @@ export default function Register() {
             })
             .catch((error) => dispatch(setErrorHandling({...errorHandling, loading: false, existing: true})));
     }
+    function timeOut() {
+        setTimeout(() => {
+            dispatch(setErrorHandling({...errorHandling, loading: false, existing: false}));
+        }, 3000);
+    }
     return (
         <div className={styles.registerContainer}>
             <h1>Register Account</h1>
@@ -72,8 +77,9 @@ export default function Register() {
                 <input className={styles.registerButton} type="submit" value="Register" />
             </form>
             {errorHandling.existing ? (
-                <div>
-                    <label className={styles.error}>This user {newUser.username} already exist</label>
+                <div className={styles.error}>
+                    {timeOut()}
+                    <label>This user {newUser.username} already exist</label>
                 </div>
             ) : null}
         </div>
