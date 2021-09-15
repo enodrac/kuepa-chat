@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import io from 'socket.io-client';
 import styles from './Chat.module.css';
 import {useSelector, useDispatch} from 'react-redux';
-import {authenticate} from '../../utils';
+import {authenticate, sliceMessage} from '../../utils';
 import ReactPlayer from 'react-player/youtube';
 import {useHistory} from 'react-router-dom';
 import {saveMessage, setErrorHandling, setUserListStore, setUserStore} from '../../redux/actions/index.js';
@@ -18,13 +18,11 @@ export default function Chat() {
     const [message, setMessage] = useState({date: '', username: '', content: '', admin: false});
     const [view, setView] = useState(true);
     const [allMessages, setAllMessages] = useState([]);
-    let send = false;
+    let cheat = 0;
 
     socket.on('message', (message) => {
-        if (send) {
-            setAllMessages([message, ...allMessages]);
-            send = false;
-        }
+        if (cheat < 1) setAllMessages([message, ...allMessages]);
+        cheat++;
     });
 
     socket.on('updateUserList', (usernames) => {
@@ -48,18 +46,13 @@ export default function Chat() {
 
     function sendMessage(e) {
         e.preventDefault();
-        send = true;
         saveMessage(message);
         socket.emit('chatMessage', message);
         setMessage({...message, content: ''});
     }
 
-    function sliceMessage(content) {
-        let splitContent = [];
-        for (let i = 0; i < 2; i++) {
-            splitContent.unshift(content.slice(0, 50));
-        }
-        return splitContent;
+    function setCheat() {
+        cheat = 0;
     }
 
     return (
@@ -67,19 +60,21 @@ export default function Chat() {
             <div className={styles.streaming}>
                 <ReactPlayer url="https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=LofiGirl" width="100%" height="100%" muted playing />
             </div>
-
             {view ? (
                 <div className={styles.chat}>
                     <div className={styles.infoContainer}>
-                        <h2>CHAT</h2>
                         {userStore.admin ? (
-                            <button className={styles.chatIndicatorBtn} onClick={() => setView(!view)}>
-                                {view ? 'history' : 'chat'}
+                            <button className={styles.chatIndicatorBtn} onClick={() => setView(false)}>
+                                RECORD
                             </button>
                         ) : null}
-                        <button onClick={() => logout()}>logout</button>
+                        <h2 className={userStore.admin ? null : styles.chatTitle}>CHAT</h2>
+                        <button className={styles.chatLogout} onClick={() => logout()}>
+                            X
+                        </button>
                     </div>
                     <div className={styles.chatMessages}>
+                        {setCheat()}
                         {allMessages.map((msg, i) => (
                             <div className={msg.username === userStore.username ? styles.chatYourMsg : styles.chatMsg} key={i}>
                                 {msg.content.length > 50 ? (
@@ -123,7 +118,7 @@ export default function Chat() {
                     </form>
                 </div>
             ) : (
-                <Record />
+                <Record setView={setView} />
             )}
         </div>
     );

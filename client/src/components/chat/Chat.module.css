@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: space-around;
 }
+
 .streaming {
     width: 65vw;
     height: 90vh;
@@ -41,6 +42,7 @@
     height: 8%;
     border-bottom: 1px solid black;
     justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 }
 .chatInput {
     position: absolute;
@@ -59,22 +61,21 @@
     margin-left: auto;
     margin-right: 2%;
     padding: 10px;
-    background-color: #caccd4;
+    background-color: #99eaf5c5;
     border-radius: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    margin-bottom: 15px;
-    border: 1px grey solid;
+    margin-bottom: 20px;
     max-width: 90%;
-    max-height: 500px;
 }
 .chatMsg {
     padding: 10px;
-    background-color: white;
+    background-color: #89ebf852;
     margin-left: 2%;
+    margin-right: auto;
     border-radius: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    margin-bottom: 15px;
-    border: 1px grey solid;
+    margin-bottom: 20px;
+    max-width: 90%;
 }
 .sendButton {
     position: absolute;
@@ -88,12 +89,125 @@
     border: 1.7px solid #0eaf52;
     color: white;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
     background-color: #157e41;
     outline: none;
     cursor: pointer;
 }
+.sendButton:active {
+    background-color: rgb(0, 114, 49);
+}
 .chatIndicatorBtn {
     display: flex;
     align-items: center;
+    background-color: rgb(61, 173, 41);
+    border-bottom-right-radius: 999px;
+    border: 0px;
+    justify-content: center;
+    height: 100%;
+    width: 25%;
+    font-size: 25px;
+    font-weight: 600;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+.chatIndicatorBtn:active {
+    background-color: rgb(38, 139, 20);
+}
+.chatLogout {
+    display: flex;
+    align-items: center;
+    background-color: rgb(211, 55, 55);
+    border-bottom-left-radius: 999px;
+    border: 0px;
+    justify-content: center;
+    height: 100%;
+    width: 25%;
+    font-size: 30px;
+    font-weight: 600;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+.chatTitle {
+    margin-left: 5%;
+}
+.chatLogout:active {
+    background-color: rgb(184, 31, 31);
+}
+@media screen and (max-width: 1700px) {
+    .chatIndicatorBtn {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 1400px) {
+    .chatIndicatorBtn {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .chatContainer {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .streaming {
+        width: 100vw;
+        height: 60vh;
+        border-radius: 0px;
+        border: 1px solid black;
+        background-color: black;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+            rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    }
+    .chat {
+        position: relative;
+        width: 100vw;
+        height: 40vh;
+        border: 1px solid black;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+            rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    }
+    .chatMessages {
+        display: flex;
+        flex-direction: column-reverse;
+        height: 75%;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+    .infoContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        height: 15%;
+        border-bottom: 1px solid black;
+        justify-content: space-between;
+    }
+    .sendButton {
+        height: 6.5%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .streaming {
+        width: 100vw;
+        height: 50vh;
+        border-radius: 0px;
+        border: 1px solid black;
+        background-color: black;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+            rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    }
+    .chat {
+        position: relative;
+        width: 100vw;
+        height: 50vh;
+        border: 1px solid black;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+            rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    }
 }

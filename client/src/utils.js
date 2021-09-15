@@ -28,3 +28,11 @@ export async function register(newUser) {
         return false;
     }
 }
+
+export function sliceMessage(content) {
+    let splitContent = [];
+    for (let i = 0; i < 5; i++) {
+        splitContent.unshift(content.slice(0, 30));
+    }
+    return splitContent;
+}
