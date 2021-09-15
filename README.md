@@ -26,6 +26,8 @@ es responsive y cuenta con una simple autenticacion mediante la base de datos y 
 
 Para poder utilizar la app:
 
+-clonar repositorio, en tu terminal de preferencia: git clone https://github.com/enodrac/kuepa-chat
+
 -se deve realizar npm i tanto en client como en server
 
 -crear un archivo .env en la carpeta server en el cual se deven de tener dos variables
