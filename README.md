@@ -32,9 +32,11 @@ Para poder utilizar la app:
 
 -crear un archivo .env en la carpeta server en el cual se deven de tener dos variables
 
-    -PORT
+    -PORT = 5000
     
-    -CONECTION_URL
+    -CONECTION_URL = hhtp://example.com
+
+- CONECTION_URL es el link con el cual conecta a la base de datos
     
 -para poder utilizar todas las funciones de la app debe crearse un usuario como administrador
 
