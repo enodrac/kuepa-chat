@@ -26,7 +26,7 @@ es responsive y cuenta con una simple autenticacion mediante la base de datos y 
 
 Para poder utilizar la app:
 
--La aplicacion utiliza mongoDb como base de datos, por lo tanto hay que tener abierto powershell ejecutando el commando: mongod y luego abrir mongoDbCompass
+-La aplicacion utiliza mongoDb como base de datos, por lo tanto hay que tener abierto powershell ejecutando el commando: mongod y luego conectarse con mongoDbCompass
 
 -Clonar repositorio, en tu terminal de preferencia: git clone https://github.com/enodrac/kuepa-chat
 
