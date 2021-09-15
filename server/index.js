@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const http = require('http');
 const {Server} = require('socket.io');
+require('dotenv').config();
 
 const router = require('./routes/index.js');
 
@@ -49,8 +50,8 @@ io.on('connection', (socket) => {
     });
 });
 
-const CONECTION_URL = 'mongodb+srv://enodrac:enodrac321@cluster0.w1gmk.mongodb.net/kuepaChat?retryWrites=true&w=majority';
-const PORT = process.env.PORT || 5000;
+const CONECTION_URL = process.env.CONECTION_URL;
+const PORT = process.env.PORT;
 
 mongoose
     .connect(CONECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})
