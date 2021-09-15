@@ -40,7 +40,7 @@ export default function Chat() {
         sessionStorage.clear();
         socket.emit('removeUserFromList', userStore);
         dispatch(setUserStore({}));
-        dispatch(setErrorHandling({loading: false, notFound: false, existing: false}));
+        dispatch(setErrorHandling({loading: false, notFound: false, existing: false, connected: false}));
         history.push('/');
     }
 
@@ -114,7 +114,11 @@ export default function Chat() {
                             value={message.content}
                             name="name"
                         />
-                        <input className={styles.sendButton} type="submit" value="SEND" />
+                        {message.content.length > 0 && message.content.length < 100 ? (
+                            <input className={styles.sendButton} type="submit" value="SEND" />
+                        ) : (
+                            <input className={styles.sendButtonDisable} type="submit" disabled value="SEND" />
+                        )}
                     </form>
                 </div>
             ) : (

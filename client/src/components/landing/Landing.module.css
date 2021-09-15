@@ -28,4 +28,12 @@
     font-weight: 500;
     width: 51%;
     font-size: 25px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .inputContainer {
+        height: 90%;
+        width: 90%;
+    }
 }

@@ -97,6 +97,22 @@
 .sendButton:active {
     background-color: rgb(0, 114, 49);
 }
+.sendButtonDisable {
+    position: absolute;
+    bottom: 3%;
+    right: 0px;
+    margin-right: 6%;
+    width: 15%;
+    height: 5.6%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1.7px solid #0eaf52;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: #4a6254;
+    outline: none;
+}
 .chatIndicatorBtn {
     display: flex;
     align-items: center;

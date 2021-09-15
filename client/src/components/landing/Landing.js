@@ -28,7 +28,7 @@ export default function Landing() {
                         className={styles.swapButton}
                         onClick={() => {
                             setView(!view);
-                            dispatch(setErrorHandling({loading: false, notFound: false, existing: false}));
+                            dispatch(setErrorHandling({loading: false, notFound: false, existing: false, connected: false}));
                         }}
                     >
                         {view ? 'Register' : 'Sign in'}

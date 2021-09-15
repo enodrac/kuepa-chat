@@ -2,7 +2,7 @@ import {SET_USERNAME, SET_ERRORHANDLING, SET_USERNAME_LIST} from '../actions/ind
 
 const initialState = {
     username: {},
-    errorHandling: {loading: false, notFound: false, existing: false},
+    errorHandling: {loading: false, notFound: false, existing: false, connected: false},
     usernameList: [],
 };
 
