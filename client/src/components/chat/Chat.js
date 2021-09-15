@@ -58,7 +58,7 @@ export default function Chat() {
     return (
         <div className={styles.chatContainer}>
             <div className={styles.streaming}>
-                <ReactPlayer url="https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=LofiGirl" width="100%" height="100%" muted playing />
+                <ReactPlayer url="https://www.youtube.com/watch?v=dtKciwk_si4&ab_channel=FlorinPop" width="100%" height="100%" muted playing />
             </div>
             {view ? (
                 <div className={styles.chat}>
