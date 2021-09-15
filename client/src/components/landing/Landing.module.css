@@ -30,6 +30,13 @@
     font-size: 25px;
     cursor: pointer;
 }
+.loading {
+    display: flex;
+    background-color: #f5f5f5;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+}
 
 @media screen and (max-width: 900px) {
     .inputContainer {

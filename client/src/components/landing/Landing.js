@@ -11,7 +11,7 @@ import {setErrorHandling} from '../../redux/actions';
 export default function Landing() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const loading = useSelector((state) => state.loading);
+    const errorHandling = useSelector((state) => state.errorHandling);
 
     const [view, setView] = useState(true);
 
@@ -22,7 +22,7 @@ export default function Landing() {
 
     return (
         <div className={styles.container}>
-            {!loading ? (
+            {!errorHandling.loading ? (
                 <div className={styles.inputContainer}>
                     <button
                         className={styles.swapButton}
@@ -36,8 +36,8 @@ export default function Landing() {
                     {view ? <Login /> : <Register />}
                 </div>
             ) : (
-                <div>
-                    <h1>loading...</h1>
+                <div className={styles.loading}>
+                    <img src="https://cdn.dribbble.com/users/108183/screenshots/5331825/loading_xxi.gif" alt="" />
                 </div>
             )}
         </div>
