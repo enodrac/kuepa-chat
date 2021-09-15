@@ -26,14 +26,14 @@ es responsive y cuenta con una simple autenticacion mediante la base de datos y 
 
 Para poder utilizar la app:
 
--la aplicacion utiliza mongoDb como base de datos, por lo tanto hay que tener atlas o una instancia local para poder
+-La aplicacion utiliza mongoDb como base de datos, por lo tanto hay que tener atlas o una instancia local para poder
 correr la app. Si se utiliza mongoDb de forma local de debe tener abierto powershell ejecutando el commando = mongod
 
--clonar repositorio, en tu terminal de preferencia: git clone https://github.com/enodrac/kuepa-chat
+-Clonar repositorio, en tu terminal de preferencia: git clone https://github.com/enodrac/kuepa-chat
 
--se deve realizar npm i tanto en client como en server
+-Se deve realizar npm i tanto en client como en server
 
--crear un archivo .env en la carpeta server en el cual se deven de tener dos variables
+-Crear un archivo .env en la carpeta server en el cual se deven de tener dos variables
 
     -PORT = 5000
     
@@ -44,12 +44,12 @@ correr la app. Si se utiliza mongoDb de forma local de debe tener abierto powers
     -CONECTION_URL = "mongodb+srv://user:password@cluster0.w1gmk.mongodb.net/NAME?retryWrites=true&w=majority"
     reemplazar user y password por el user y password de atlas, NAME por el nombre que que quieras darle a la base de datos
 
-- CONECTION_URL es el link con el cual conecta a la base de datos
+-CONECTION_URL es el link con el cual conecta a la base de datos
 
--al finalizar los pasos anterior se deben abrir dos terminales una en server y otra en client en las cuales
+-Al finalizar los pasos anterior se deben abrir dos terminales una en server y otra en client en las cuales
 hay que ingresar el comando npm start para que inicie su funcionamiento
     
--para poder utilizar todas las funciones de la app debe crearse un usuario como administrador
+-Para poder utilizar todas las funciones de la app debe crearse un usuario como administrador
 
 # SCREENSHOTS
 
