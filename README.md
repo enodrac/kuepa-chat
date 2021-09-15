@@ -22,7 +22,7 @@ La aplicacion permite el registro y logueo de usuarios los cuales ingresan a una
 todos los mensajes son guardados en la base de datos y pueden ser pedidos por un administrador,
 es responsive y cuenta con una simple autenticacion mediante la base de datos y session web
 
--instalacion-
+# INSTALACION
 
 Para poder utilizar la app:
 
