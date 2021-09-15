@@ -80,8 +80,9 @@ export default function Chat() {
                                 {msg.content.length > 50 ? (
                                     <div>
                                         <label>
-                                            {msg.date.split(' ').pop().slice(0, 5)} {msg.username === userStore.username ? 'you' : msg.username}{' '}
-                                            {msg.admin ? 'admin' : null}:
+                                            {msg.date.split(' ').pop().slice(0, 5)}{' '}
+                                            {msg.username === userStore.username ? <label style={{color: 'green'}}>you</label> : msg.username}{' '}
+                                            {msg.admin ? <label style={{color: 'darkorange'}}>admin</label> : null}:
                                         </label>
                                         {sliceMessage(msg.content).map((content) => (
                                             <p>{content}</p>
@@ -90,8 +91,9 @@ export default function Chat() {
                                 ) : (
                                     <div>
                                         <label>
-                                            {msg.date.split(' ').pop().slice(0, 5)} {msg.username === userStore.username ? 'you' : msg.username}{' '}
-                                            {msg.admin ? 'admin' : null}:{' '}
+                                            {msg.date.split(' ').pop().slice(0, 5)}{' '}
+                                            {msg.username === userStore.username ? <label style={{color: 'green'}}>you</label> : msg.username}{' '}
+                                            {msg.admin ? <label style={{color: 'darkorange'}}>admin</label> : null}:{' '}
                                         </label>
                                         <p>{msg.content}</p>
                                     </div>

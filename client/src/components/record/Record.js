@@ -10,12 +10,20 @@ export default function Record({setView}) {
     const usernameListStore = useSelector((state) => state.usernameList);
     const [allMsgByUser, setAllMsgByUser] = useState([]);
     const [search, setSearch] = useState('');
+    const [error, setError] = useState({loading: false, noMsg: false, noUser: false});
 
     function handleSearch(e) {
         e.preventDefault();
         if (search.length) {
+            setAllMsgByUser([]);
+            setError({loading: true, noMsg: false, noUser: false});
             getMessagesByUser(search).then((res) => {
-                setAllMsgByUser(res.data.reverse());
+                if (res.data) {
+                    if (res.data.length) {
+                        setError({loading: false, noMsg: false, noUser: false});
+                        setAllMsgByUser(res.data.reverse());
+                    } else setError({loading: false, noMsg: true, noUser: false});
+                } else setError({loading: false, noMsg: false, noUser: true});
             });
         }
     }
@@ -43,11 +51,16 @@ export default function Record({setView}) {
                 </select>
                 <label>all users: </label>
                 <input onChange={(e) => setSearch(e.target.value)} type="text" value={search} placeholder="username..." />
-                <input type="submit" value="search" />
+                <input className={styles.searchButton} type="submit" value="search" />
             </form>
+            <div className={styles.errors}>
+                {error.loading ? <p>Loading...</p> : null}
+                {error.noMsg ? <p>There are no messages for this user </p> : null}
+                {error.noUser ? <p>User not found </p> : null}
+            </div>
             <div className={styles.recordMessages}>
                 {allMsgByUser.map((msg, i) => (
-                    <div className={msg.username === userStore.username ? styles.chatYourMsg : styles.chatMsg} key={i}>
+                    <div className={styles.message} key={i}>
                         {msg.content.length > 50 ? (
                             <div>
                                 <label>

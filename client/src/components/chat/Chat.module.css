@@ -18,6 +18,7 @@
 }
 .chat {
     position: relative;
+    min-width: 400px;
     width: 30vw;
     height: 90vh;
     border: 1px solid black;
@@ -205,6 +206,9 @@
         justify-content: space-between;
     }
     .sendButton {
+        height: 6.5%;
+    }
+    .sendButtonDisable {
         height: 6.5%;
     }
 }
