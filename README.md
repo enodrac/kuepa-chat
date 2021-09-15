@@ -37,9 +37,11 @@ correr la app. Si se utiliza mongoDb de forma local de debe tener abierto powers
 
     -PORT = 5000
     
-    para instancia local -CONECTION_URL = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
+    para instancia local 
+    -CONECTION_URL = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
     
-    para atlas -CONECTION_URL = "mongodb+srv://username:password@cluster0.w1gmk.mongodb.net/NAME?retryWrites=true&w=majority"
+    para atlas usuario gratis(cluster0)
+    -CONECTION_URL = "mongodb+srv://username:password@cluster0.w1gmk.mongodb.net/NAME?retryWrites=true&w=majority"
     reemplazar username por el username de atlas, password por el password de atlas, y NAME por el nombre que que quieras darle a la base de datos
 
 - CONECTION_URL es el link con el cual conecta a la base de datos
