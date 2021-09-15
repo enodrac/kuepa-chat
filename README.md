@@ -26,8 +26,7 @@ es responsive y cuenta con una simple autenticacion mediante la base de datos y 
 
 Para poder utilizar la app:
 
--La aplicacion utiliza mongoDb como base de datos, por lo tanto hay que tener atlas o una instancia local para poder
-correr la app. Si se utiliza mongoDb de forma local de debe tener abierto powershell ejecutando el commando = mongod
+-La aplicacion utiliza mongoDb como base de datos, por lo tanto hay que tener abierto powershell ejecutando el commando: mongod y luego abrir mongoDbCompass
 
 -Clonar repositorio, en tu terminal de preferencia: git clone https://github.com/enodrac/kuepa-chat
 
@@ -37,15 +36,8 @@ correr la app. Si se utiliza mongoDb de forma local de debe tener abierto powers
 
     -PORT = 5000
     
-    para instancia local 
     -CONECTION_URL = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
     
-    *solo se tiene que poner una variable dependiendo si es local o atlas
-    
-    para atlas usuario gratis(cluster0)
-    -CONECTION_URL = "mongodb+srv://user:password@cluster0.w1gmk.mongodb.net/NAME?retryWrites=true&w=majority"
-    reemplazar user y password por el user y password de atlas, NAME por el nombre que que quieras darle a la base de datos
-
 -CONECTION_URL es el link con el cual conecta a la base de datos
 
 -Al finalizar los pasos anterior se deben abrir dos terminales una en server y otra en client en las cuales
