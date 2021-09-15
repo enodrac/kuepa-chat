@@ -16,7 +16,7 @@ Aplicacion de chat tipo zoom, realizada con las siguientes technologias:
 
 -Css
 
--descripcion-
+-DESCRIPCION-
 
 La aplicacion permite el registro y logueo de usuarios los cuales ingresan a una transmision con chat abierto en tiempo real,
 todos los mensajes son guardados en la base de datos y pueden ser pedidos por un administrador,
@@ -36,7 +36,7 @@ Para poder utilizar la app:
     
 -para poder utilizar todas las funciones de la app debe crearse un usuario como administrador
 
--screenshots-
+-SCREENSHOTS-
 
 ![alt text](https://cdn.discordapp.com/attachments/887586717475958806/887586739995160656/unknown.png)
 ![alt text](https://cdn.discordapp.com/attachments/887586717475958806/887586821322715176/unknown.png)
