@@ -47,6 +47,8 @@ hay que ingresar el comando npm start para que inicie su funcionamiento
 
 # SCREENSHOTS
 
+video => https://drive.google.com/file/d/1ZV1hQGfu7V_J_7sCtPE1aLyIYzS2an7G/view?usp=sharing
+
 ![alt text](https://cdn.discordapp.com/attachments/887586717475958806/887586739995160656/unknown.png)
 ![alt text](https://cdn.discordapp.com/attachments/887586717475958806/887586821322715176/unknown.png)
 ![alt text](https://cdn.discordapp.com/attachments/887586717475958806/887590328608129045/unknown.png)
