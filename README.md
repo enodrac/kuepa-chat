@@ -36,7 +36,7 @@ Para poder utilizar la app:
 
     -PORT = 5000
     
-    -CONECTION_URL = "mongodb://localhost:27017/?readPreference=primary&kuepachat=MongoDB%20Compass&directConnection=true&ssl=false"
+    -CONECTION_URL = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
     
 -CONECTION_URL es el link con el cual conecta a la base de datos
 
